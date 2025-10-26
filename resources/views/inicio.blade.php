@@ -15,9 +15,15 @@
             <a href="{{ route('catalogo') }}" class="bg-amber-900 text-white px-8 py-3 rounded-lg hover:bg-amber-800 transition text-lg font-semibold">
                 Ver Catálogo
             </a>
-            <a href="{{ route('contacto') }}" class="bg-white text-amber-900 px-8 py-3 rounded-lg hover:bg-amber-100 transition text-lg font-semibold border-2 border-amber-900">
-                Hacer Pedido
-            </a>
+            @auth
+                <a href="{{ route('pedidos') }}" class="bg-white text-amber-900 px-8 py-3 rounded-lg hover:bg-amber-100 transition text-lg font-semibold border-2 border-amber-900">
+                    Hacer Pedido
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="bg-white text-amber-900 px-8 py-3 rounded-lg hover:bg-amber-100 transition text-lg font-semibold border-2 border-amber-900">
+                    Hacer Pedido
+                </a>
+            @endauth
         </div>
     </div>
 </section>
@@ -53,7 +59,7 @@
         <p class="text-xl text-amber-800 mb-8">
             Hacé tu pedido ahora y disfrutá de la mejor calidad
         </p>
-        <a href="{{ route('contacto') }}" class="inline-block bg-amber-900 text-white px-10 py-4 rounded-lg hover:bg-amber-800 transition text-lg font-semibold">
+        <a href="{{ route('pedidos') }}" class="inline-block bg-amber-900 text-white px-10 py-4 rounded-lg hover:bg-amber-800 transition text-lg font-semibold">
             Solicitar Alfajores
         </a>
     </div>

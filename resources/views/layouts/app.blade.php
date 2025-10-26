@@ -22,7 +22,7 @@
                     <a href="{{ route('inicio') }}" class="hover:text-amber-200 transition">Inicio</a>
                     <a href="{{ route('fabrica') }}" class="hover:text-amber-200 transition">Fábrica</a>
                     <a href="{{ route('catalogo') }}" class="hover:text-amber-200 transition">Catálogo</a>
-                    <a href="{{ route('contacto') }}" class="hover:text-amber-200 transition">Pedidos</a>
+                    <a href="{{ route('pedidos') }}" class="hover:text-amber-200 transition">Pedidos</a>
                     @if(session('authenticated'))
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
@@ -44,7 +44,7 @@
                 <a href="{{ route('inicio') }}" class="block py-2 hover:text-amber-200">Inicio</a>
                 <a href="{{ route('fabrica') }}" class="block py-2 hover:text-amber-200">Fábrica</a>
                 <a href="{{ route('catalogo') }}" class="block py-2 hover:text-amber-200">Catálogo</a>
-                <a href="{{ route('contacto') }}" class="block py-2 hover:text-amber-200">Pedidos</a>
+                <a href="{{ route('pedidos') }}" class="block py-2 hover:text-amber-200">Pedidos</a>
                 @if(session('authenticated'))
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -88,7 +88,6 @@
                 <div>
                     <h4 class="font-bold mb-4">Horarios</h4>
                     <p>Lunes a Viernes: 9:00 - 18:00</p>
-                    <p>Sábados: 9:00 - 13:00</p>
                 </div>
             </div>
             <div class="text-center mt-8 pt-8 border-t border-amber-700">

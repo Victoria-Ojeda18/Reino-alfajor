@@ -1,69 +1,109 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Club del Alfajor</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #fff3e0; padding: 50px; }
-        .card { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .btn { background: #e67e22; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        .btn:hover { background: #d35400; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; }
-        .error { color: red; font-size: 0.9em; }
-        a { color: #e67e22; text-decoration: none; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>¡Asociate al Club del Alfajor! 🍪</h2>
+@extends('layouts.app')
 
-        @if ($errors->any())
-            <div style="color: red; margin-bottom: 15px;">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            </div>
-        @endif
+@section('title', 'Registro - Reino Alfajor')
 
-        @if (session('success'))
-            <div style="color: green; margin-bottom: 15px;">
-                {{ session('success') }}
-            </div>
-        @endif
+@section('content')
+<section class="py-16 bg-amber-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-md mx-auto">
+            <h1 class="text-4xl font-bold text-center text-amber-900 mb-8">
+                ¡Asociate al Club del Alfajor! 🍪
+            </h1>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña (mínimo 8 caracteres)</label>
-                <input type="password" name="password" id="password" required>
-            </div>
-            <div class="form-group">
-                <label for="password_confirmation">Confirmar Contraseña</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" required>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" name="acepta_directrices" required>
-                    Acepto las <a href="/directrices" target="_blank">directrices del Club</a> y quiero recibir alfajores mensuales.
-                </label>
-            </div>
-            <button type="submit" class="btn">Registrarme y asociarme</button>
-        </form>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 text-center">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <p style="margin-top: 20px;">
-            ¿Ya tenés cuenta? <a href="{{ route('login') }}">Iniciá sesión aquí</a>
-        </p>
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <div class="bg-white p-8 rounded-xl shadow-md">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <div class="mb-6">
+                        <label for="name" class="block text-amber-900 font-semibold mb-2">Nombre</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            value="{{ old('name') }}" 
+                            class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="email" class="block text-amber-900 font-semibold mb-2">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value="{{ old('email') }}" 
+                            class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="password" class="block text-amber-900 font-semibold mb-2">Contraseña (mínimo 8 caracteres)</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="password_confirmation" class="block text-amber-900 font-semibold mb-2">Confirmar Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="password_confirmation" 
+                            name="password_confirmation" 
+                            class="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-6 flex items-start">
+                        <input 
+                            type="checkbox" 
+                            name="acepta_directrices" 
+                            id="acepta_directrices"
+                            class="mt-1 mr-2 h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                            required
+                        >
+                        <label for="acepta_directrices" class="text-gray-700">
+                            Acepto las <a href="/directrices" target="_blank" class="text-amber-900 hover:text-amber-800 font-semibold">directrices del Club</a> y quiero recibir alfajores mensuales.
+                        </label>
+                    </div>
+
+                    <div class="text-center">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-amber-900 text-white px-8 py-3 rounded-lg hover:bg-amber-800 transition text-lg font-semibold"
+                        >
+                            Registrarme y asociarme
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <p class="text-center text-gray-600 mt-6">
+                ¿Ya tenés cuenta? <a href="{{ route('login') }}" class="text-amber-900 hover:text-amber-800 font-semibold">Iniciá sesión aquí</a>
+            </p>
+        </div>
     </div>
-</body>
-</html>
+</section>
+@endsection

@@ -13,9 +13,12 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($productos as $producto)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                <div class="h-64 bg-gradient-to-br from-amber-200 to-amber-400 flex items-center justify-center">
-                    <span class="text-8xl">🥐</span>
-                </div>
+                <!-- Imagen del producto -->
+                <img 
+                    src="{{ $producto['imagen'] }}" 
+                    alt="{{ $producto['nombre'] }}" 
+                    class="w-full h-64 object-cover"
+                >
                 <div class="p-6">
                     <h3 class="text-2xl font-bold text-amber-900 mb-2">{{ $producto['nombre'] }}</h3>
                     <p class="text-gray-700 mb-4">{{ $producto['descripcion'] }}</p>

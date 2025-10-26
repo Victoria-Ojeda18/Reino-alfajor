@@ -1,24 +1,40 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FabricaController;
 use App\Http\Controllers\ContactoController;
-use App\Http\Controllers\CatalogoController;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
-// Rutas públicas
-Route::get('/', [HomeController::class, 'index'])->name('inicio');
-Route::get('/fabrica', [FabricaController::class, 'index'])->name('fabrica');
-Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
+Route::get('/', function () {
+    return view('inicio');
+})->name('inicio');
 
 // Rutas de autenticación
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post'); // ← ¡así debe quedar!
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Rutas protegidas (requieren login)
-Route::middleware('auth.custom')->group(function () {
-    Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
-    Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+Route::middleware('auth')->group(function () {
+    Route::get('/pedidos', [AuthController::class, 'showPedidos'])->name('pedidos');
+    Route::post('/pedidos', [AuthController::class, 'storePedido'])->name('pedidos.store');
 });
+
+Route::get('/fabrica', function () {
+    return view('fabrica');
+});
+Route::get('/fabrica', [FabricaController::class, 'index'])->name('fabrica');
+
+Route::get('/catalogo', function () {
+    return view('catalogo');
+})->name('catalogo');
+Route::get('/catalogo', [App\Http\Controllers\CatalogoController::class, 'index'])->name('catalogo');
+
+
+Route::get('/contacto', function () {
+    return view('contacto');
+})->name('contacto');
+Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
